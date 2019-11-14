@@ -8,7 +8,7 @@
     tools:context=".ui.main.MainFragment" >
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/photo_list_recycler_view"
+        android:id="@+id/rv_photo_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
