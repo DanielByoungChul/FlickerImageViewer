@@ -5,15 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.deloitte.flickerimageviewer.ui.models.Photo
+import com.deloitte.flickerimageviewer.ui.util.PreferenceUtil
 
 class MainViewModel : ViewModel() {
 
-    private val _index: MutableLiveData<String> = MutableLiveData()
-    val photos: LiveData<List<Photo>> = Transformations.switchMap(_index) {
+    private val _message: MutableLiveData<String> = MutableLiveData()
+    val photos: LiveData<List<Photo>> = Transformations.switchMap(_message) {
         MainRespository.getPhotos()
     }
 
-    fun setIndex(index:String) {
-        _index.value = index
+    fun setMessage(message:String) {
+
+        _message.value = message
+
     }
 }

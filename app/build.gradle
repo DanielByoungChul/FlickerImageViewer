@@ -50,4 +50,7 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+
+    // Preference-Ktx
+    implementation "androidx.preference:preference-ktx:1.1.0"
 }
