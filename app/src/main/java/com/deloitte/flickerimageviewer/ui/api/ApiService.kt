@@ -7,12 +7,12 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("/services/rest")
-    fun getPhotos(
+    suspend fun getPhotos(
         @Query("method") method: String,
         @Query("api_key") apiKey: String,
         @Query("text") text: String,
         @Query("format") format: String,
-        @Query("text") nojsoncallback: String
+        @Query("nojsoncallback") nojsoncallback: String
     ):ResponsePhotos
 
 }
