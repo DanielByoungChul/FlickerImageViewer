@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.deloitte.flickerimageviewer.ui.models.Photo
-import com.deloitte.flickerimageviewer.ui.util.PreferenceUtil
 
 class MainViewModel : ViewModel() {
 
@@ -14,9 +13,11 @@ class MainViewModel : ViewModel() {
         MainRespository.getPhotos()
     }
 
-    fun setMessage(message:String) {
+    init {
+        initViewModel("Init")
+    }
 
+    fun initViewModel(message:String) {
         _message.value = message
-
     }
 }

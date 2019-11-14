@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.deloitte.flickerimageviewer.R
 import com.deloitte.flickerimageviewer.ui.adapters.PhotoListRecyclerViewAdapter
-import com.deloitte.flickerimageviewer.ui.util.PreferenceUtil
 
 
 class MainFragment : Fragment() {
@@ -33,25 +32,13 @@ class MainFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
-        context?.let {
+        viewModel.photos.observe(this, Observer {
 
-            val test = PreferenceUtil.getLastKnownMessage(it)
-            println("test = $test")
-            if(!PreferenceUtil.getLastKnownMessage(it).equals("Start")) {
-                viewModel.setMessage("Start")
-                PreferenceUtil.setLastKnownMessage(it,"Start")
-            }
+            println("list of photo : $it")
+            println("size of list of photo : ${it.size}")
+            recyclerView.adapter = context?.let { context -> PhotoListRecyclerViewAdapter(context,it) }
 
-            viewModel.photos.observe(this, Observer {
-
-                println("list of photo : $it")
-                println("size of list of photo : ${it.size}")
-
-                recyclerView.adapter = context?.let { context -> PhotoListRecyclerViewAdapter(context,it) }
-
-            })
-        }
-
+        })
 
         return view
     }
