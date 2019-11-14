@@ -23,9 +23,9 @@ class PhotoListRecyclerViewAdapter(val context: Context, val photos: List<Photo>
     }
 
     override fun onBindViewHolder(holder: PhotoListViewHolder, position: Int) {
-        showImageView1(holder,photos.get(3*position))
-        showImageView2(holder,photos.get(3*position+1))
-        showImageView3(holder,photos.get(3*position+2))
+        showImageView1(holder,photos.get(position))
+//        showImageView2(holder,photos.get(3*position+1))
+//        showImageView3(holder,photos.get(3*position+2))
     }
 
     fun showImageView1(holder: PhotoListViewHolder, photoInfo: Photo) {
@@ -34,26 +34,26 @@ class PhotoListRecyclerViewAdapter(val context: Context, val photos: List<Photo>
             .load(getHttpsUrl(photoInfo))
             .placeholder(R.drawable.ic_broken_image)
             .centerCrop()
-            .into(holder.photoImageView1)
+            .into(holder.photoImageView)
     }
 
-    fun showImageView2(holder: PhotoListViewHolder, photoInfo: Photo) {
-        Glide
-            .with(context)
-            .load(getHttpsUrl(photoInfo))
-            .placeholder(R.drawable.ic_broken_image)
-            .centerCrop()
-            .into(holder.photoImageView2)
-    }
-
-    fun showImageView3(holder: PhotoListViewHolder, photoInfo: Photo) {
-        Glide
-            .with(context)
-            .load(getHttpsUrl(photoInfo))
-            .placeholder(R.drawable.ic_broken_image)
-            .centerCrop()
-            .into(holder.photoImageView3)
-    }
+//    fun showImageView2(holder: PhotoListViewHolder, photoInfo: Photo) {
+//        Glide
+//            .with(context)
+//            .load(getHttpsUrl(photoInfo))
+//            .placeholder(R.drawable.ic_broken_image)
+//            .centerCrop()
+//            .into(holder.photoImageView2)
+//    }
+//
+//    fun showImageView3(holder: PhotoListViewHolder, photoInfo: Photo) {
+//        Glide
+//            .with(context)
+//            .load(getHttpsUrl(photoInfo))
+//            .placeholder(R.drawable.ic_broken_image)
+//            .centerCrop()
+//            .into(holder.photoImageView3)
+//    }
     /**
      * http://farm{farm}.static.flickr.com/{server}/{id}_{secret}.jpg
      * http://farm5.static.flickr.com/4740/39593986652_0ec416669f.jpg
@@ -78,8 +78,8 @@ class PhotoListRecyclerViewAdapter(val context: Context, val photos: List<Photo>
 
 
     inner class PhotoListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val photoImageView1 =  itemView.findViewById<ImageView>(R.id.photo_image1)
-        val photoImageView2 =  itemView.findViewById<ImageView>(R.id.photo_image2)
-        val photoImageView3 =  itemView.findViewById<ImageView>(R.id.photo_image3)
+        val photoImageView =  itemView.findViewById<ImageView>(R.id.ivPhoto)
+//        val photoImageView2 =  itemView.findViewById<ImageView>(R.id.photo_image2)
+//        val photoImageView3 =  itemView.findViewById<ImageView>(R.id.photo_image3)
     }
 }

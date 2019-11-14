@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.deloitte.flickerimageviewer.R
@@ -28,7 +29,10 @@ class MainFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.main_fragment, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_photo_list)
-        recyclerView.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
+        recyclerView.layoutManager = GridLayoutManager(context,3)
+//        recyclerView.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
+
+        // GridLayoutManager mGridLayoutManager = new GridLayoutManager(MainActivity.this, 2);
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
