@@ -1,6 +1,5 @@
 package com.deloitte.flickerimageviewer.ui.main
 
-import android.provider.ContactsContract
 import androidx.lifecycle.LiveData
 import com.deloitte.flickerimageviewer.ui.api.RetrofitBuilder
 import com.deloitte.flickerimageviewer.ui.models.Photo
@@ -17,7 +16,6 @@ class MainRespository {
         const val NO_JSON_CALLBACK = "1"
 
         lateinit var job: Job
-
 
         fun getPhotos(): LiveData<List<Photo>> {
 

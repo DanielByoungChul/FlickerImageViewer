@@ -20,4 +20,8 @@ class MainViewModel : ViewModel() {
     fun initViewModel(message:String) {
         _message.value = message
     }
+
+    fun reloadViewModel(message: String) {
+        _message.value = message
+    }
 }

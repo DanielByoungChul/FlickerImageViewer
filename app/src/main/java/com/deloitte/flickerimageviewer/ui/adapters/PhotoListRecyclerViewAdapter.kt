@@ -4,29 +4,66 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.deloitte.flickerimageviewer.R
+import com.deloitte.flickerimageviewer.ui.interfaces.ILoadMore
 import com.deloitte.flickerimageviewer.ui.models.Photo
+import kotlinx.android.synthetic.main.list_item.view.*
+import kotlinx.android.synthetic.main.main_fragment.view.*
 import java.lang.StringBuilder
 
-class PhotoListRecyclerViewAdapter(val context: Context, val photos: List<Photo>):
-    RecyclerView.Adapter<PhotoListRecyclerViewAdapter.PhotoListViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoListViewHolder {
+class PhotoListRecyclerViewAdapter(val context: Context, recyclerView: RecyclerView, val photos: List<Photo>):
+    RecyclerView.Adapter<PhotoListRecyclerViewAdapter.PhotoItemViewHolder>() {
+
+    internal var loadMore: ILoadMore? = null
+    internal var isLoading: Boolean = false
+    internal var visibleThreshold = 20
+    internal var lastVisibleItem: Int = 0
+    internal var totalItemCount: Int = 0
+
+
+    init {
+        val gridLayoutManager = recyclerView.layoutManager as GridLayoutManager
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                totalItemCount = gridLayoutManager.itemCount
+                lastVisibleItem = gridLayoutManager.findLastVisibleItemPosition()
+
+                if(!isLoading && totalItemCount <= lastVisibleItem + visibleThreshold) {
+                    if(loadMore != null)
+                        loadMore!!.onLoadMore()
+                    isLoading = true
+                }
+            }
+        })
+
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoItemViewHolder {
+
         val v = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent,false)
-        return PhotoListViewHolder(v)
+        return PhotoItemViewHolder(v)
+    }
+
+    override fun onBindViewHolder(holder: PhotoItemViewHolder, position: Int) {
+        showImageView(holder, photos[position])
     }
 
     override fun getItemCount(): Int {
         return photos.size
     }
 
-    override fun onBindViewHolder(holder: PhotoListViewHolder, position: Int) {
-        showImageView1(holder,photos.get(position))
+
+    fun setLoaded() {
+        isLoading = false
     }
 
-    fun showImageView1(holder: PhotoListViewHolder, photoInfo: Photo) {
+    fun showImageView(holder: PhotoItemViewHolder, photoInfo: Photo) {
         Glide
             .with(context)
             .load(getHttpsUrl(photoInfo))
@@ -57,8 +94,12 @@ class PhotoListRecyclerViewAdapter(val context: Context, val photos: List<Photo>
         return urlOutput
     }
 
-
-    inner class PhotoListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val photoImageView =  itemView.findViewById<ImageView>(R.id.ivPhoto)
+    fun setLoad(iLoadMore: ILoadMore) {
+        this.loadMore = iLoadMore
     }
+
+    inner class PhotoItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val photoImageView =  itemView.ivPhoto
+    }
+
 }

@@ -53,4 +53,7 @@ dependencies {
 
     // Preference-Ktx
     implementation "androidx.preference:preference-ktx:1.1.0"
+
+    // Paging
+    implementation 'android.arch.paging:runtime:1.0.1'
 }
