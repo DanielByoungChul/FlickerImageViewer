@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -87,7 +88,16 @@ class PhotoListRecyclerViewAdapter(val context: Context, recyclerView: RecyclerV
     }
 
     inner class PhotoItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        init {
+            itemView.setOnClickListener {
+                Toast.makeText(context, "item is click", Toast.LENGTH_LONG).show()
+            }
+        }
+
         val photoImageView =  itemView.ivPhoto
+
+
     }
 
 }
