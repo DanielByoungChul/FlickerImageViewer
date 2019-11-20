@@ -20,23 +20,23 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_photo_list"
+                style="@style/recycler_view_margin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                style="@style/recycler_view_margin" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </ScrollView>
 
         <ProgressBar
             android:id="@+id/paging_progressbar"
+            style="@style/progress_bar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            style="@style/progress_bar" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
