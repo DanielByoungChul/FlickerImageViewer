@@ -9,26 +9,17 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainFragment">
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_photo_list"
+            style="@style/recycler_view_margin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_photo_list"
-                style="@style/recycler_view_margin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </ScrollView>
+            app:layout_constraintTop_toTopOf="parent"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="insideInset"/>
 
         <ProgressBar
             android:id="@+id/paging_progressbar"
