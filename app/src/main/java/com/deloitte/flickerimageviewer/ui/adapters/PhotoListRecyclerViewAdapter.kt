@@ -13,7 +13,7 @@ import com.deloitte.flickerimageviewer.models.Photo
 import com.deloitte.flickerimageviewer.utils.PhotoInfoToHttpsUrl
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class PhotoListRecyclerViewAdapter(val context: Context, recyclerView: RecyclerView, val photos: List<Photo>):
+class PhotoListRecyclerViewAdapter(val context: Context, recyclerView: RecyclerView):
     RecyclerView.Adapter<PhotoListRecyclerViewAdapter.PhotoItemViewHolder>() {
 
     internal var loadMore: ILoadMore? = null
@@ -22,7 +22,7 @@ class PhotoListRecyclerViewAdapter(val context: Context, recyclerView: RecyclerV
     internal var lastVisibleItem: Int = 0
     internal var totalItemCount: Int = 0
 
-    lateinit var photoList: List<Photo>
+    var photoList: List<Photo> = emptyList()
 
 
     init {
@@ -52,11 +52,11 @@ class PhotoListRecyclerViewAdapter(val context: Context, recyclerView: RecyclerV
     }
 
     override fun onBindViewHolder(holder: PhotoItemViewHolder, position: Int) {
-        showImageView(holder, photos[position])
+        showImageView(holder, photoList[position])
     }
 
     override fun getItemCount(): Int {
-        return photos.size
+        return photoList.size
     }
 
 
@@ -74,6 +74,16 @@ class PhotoListRecyclerViewAdapter(val context: Context, recyclerView: RecyclerV
 
     fun setLoad(iLoadMore: ILoadMore) {
         this.loadMore = iLoadMore
+    }
+
+    fun setData(photoListData: List<Photo>?) {
+        photoListData?.let {
+            photoList = it
+        }
+    }
+
+    fun getPopulatedListSize(): Int {
+        return photoList.size
     }
 
     inner class PhotoItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
