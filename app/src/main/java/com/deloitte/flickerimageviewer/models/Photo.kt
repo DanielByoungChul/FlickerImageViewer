@@ -1,4 +1,4 @@
-package com.deloitte.flickerimageviewer.ui.models
+package com.deloitte.flickerimageviewer.models
 
 data class Photo(
     val id: String,

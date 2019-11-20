@@ -1,4 +1,4 @@
-package com.deloitte.flickerimageviewer.ui.api
+package com.deloitte.flickerimageviewer.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

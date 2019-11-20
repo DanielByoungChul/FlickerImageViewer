@@ -1,7 +1,8 @@
-package com.deloitte.flickerimageviewer
+package com.deloitte.flickerimageviewer.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.deloitte.flickerimageviewer.R
 import com.deloitte.flickerimageviewer.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {

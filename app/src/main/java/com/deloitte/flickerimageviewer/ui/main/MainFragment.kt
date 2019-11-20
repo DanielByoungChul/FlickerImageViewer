@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.deloitte.flickerimageviewer.R
 import com.deloitte.flickerimageviewer.ui.adapters.PhotoListRecyclerViewAdapter
-import com.deloitte.flickerimageviewer.ui.interfaces.ILoadMore
+import com.deloitte.flickerimageviewer.interfaces.ILoadMore
 
 class MainFragment : Fragment(), ILoadMore {
 
@@ -29,7 +29,7 @@ class MainFragment : Fragment(), ILoadMore {
     ): View {
 
         val view = inflater.inflate(R.layout.main_fragment, container, false)
-        progressBar = view.findViewById(R.id.progressbar)
+        progressBar = view.findViewById(R.id.paging_progressbar)
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_photo_list)
         recyclerView.layoutManager = GridLayoutManager(context,3)
 

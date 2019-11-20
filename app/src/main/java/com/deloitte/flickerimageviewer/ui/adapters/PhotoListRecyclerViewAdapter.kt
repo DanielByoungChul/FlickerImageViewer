@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.deloitte.flickerimageviewer.R
-import com.deloitte.flickerimageviewer.ui.interfaces.ILoadMore
-import com.deloitte.flickerimageviewer.ui.models.Photo
+import com.deloitte.flickerimageviewer.interfaces.ILoadMore
+import com.deloitte.flickerimageviewer.models.Photo
+import com.deloitte.flickerimageviewer.utils.PhotoInfoToHttpsUrl
 import kotlinx.android.synthetic.main.list_item.view.*
-import kotlinx.android.synthetic.main.main_fragment.view.*
-import java.lang.StringBuilder
 
 class PhotoListRecyclerViewAdapter(val context: Context, recyclerView: RecyclerView, val photos: List<Photo>):
     RecyclerView.Adapter<PhotoListRecyclerViewAdapter.PhotoItemViewHolder>() {
@@ -22,6 +21,8 @@ class PhotoListRecyclerViewAdapter(val context: Context, recyclerView: RecyclerV
     internal var visibleThreshold = 20
     internal var lastVisibleItem: Int = 0
     internal var totalItemCount: Int = 0
+
+    lateinit var photoList: List<Photo>
 
 
     init {
@@ -66,32 +67,9 @@ class PhotoListRecyclerViewAdapter(val context: Context, recyclerView: RecyclerV
     fun showImageView(holder: PhotoItemViewHolder, photoInfo: Photo) {
         Glide
             .with(context)
-            .load(getHttpsUrl(photoInfo))
-            .placeholder(R.drawable.ic_broken_image)
+            .load(PhotoInfoToHttpsUrl.convert(photoInfo))
             .centerCrop()
             .into(holder.photoImageView)
-    }
-
-    /**
-     * http://farm{farm}.static.flickr.com/{server}/{id}_{secret}.jpg
-     * http://farm5.static.flickr.com/4740/39593986652_0ec416669f.jpg
-     * */
-    private fun getHttpsUrl(photoInfo: Photo): String {
-        val stringBuilder = StringBuilder()
-        stringBuilder.append("https://farm")
-            .append(photoInfo.farm)
-            .append(".static.flickr.com/")
-            .append(photoInfo.server)
-            .append("/")
-            .append(photoInfo.id)
-            .append("_")
-            .append(photoInfo.secret)
-            .append(".jpg")
-
-        val urlOutput = stringBuilder.toString()
-
-        println("urlOutput = $urlOutput")
-        return urlOutput
     }
 
     fun setLoad(iLoadMore: ILoadMore) {

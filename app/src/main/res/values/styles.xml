@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="recycler_view_margin">
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="progress_bar">
+        <item name="android:layout_width">46dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginBottom">32dp</item>
+    </style>
+
 </resources>

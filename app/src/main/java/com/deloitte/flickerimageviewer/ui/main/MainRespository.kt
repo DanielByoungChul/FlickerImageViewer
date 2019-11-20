@@ -1,8 +1,8 @@
 package com.deloitte.flickerimageviewer.ui.main
 
 import androidx.lifecycle.LiveData
-import com.deloitte.flickerimageviewer.ui.api.RetrofitBuilder
-import com.deloitte.flickerimageviewer.ui.models.Photo
+import com.deloitte.flickerimageviewer.api.RetrofitBuilder
+import com.deloitte.flickerimageviewer.models.Photo
 import kotlinx.coroutines.*
 
 class MainRespository {

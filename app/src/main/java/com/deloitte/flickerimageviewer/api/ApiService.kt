@@ -1,6 +1,6 @@
-package com.deloitte.flickerimageviewer.ui.api
+package com.deloitte.flickerimageviewer.api
 
-import com.deloitte.flickerimageviewer.ui.api.response.ResponsePhotos
+import com.deloitte.flickerimageviewer.api.response.ResponsePhotos
 import retrofit2.http.GET
 import retrofit2.http.Query
 
