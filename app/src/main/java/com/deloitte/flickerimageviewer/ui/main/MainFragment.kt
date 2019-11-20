@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.deloitte.flickerimageviewer.R
+import com.deloitte.flickerimageviewer.databinding.MainFragmentBinding
 import com.deloitte.flickerimageviewer.ui.adapters.PhotoListRecyclerViewAdapter
 import com.deloitte.flickerimageviewer.interfaces.ILoadMore
 
@@ -20,6 +22,7 @@ class MainFragment : Fragment(), ILoadMore {
         fun newInstance() = MainFragment()
     }
 
+    lateinit var binding: MainFragmentBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var progressBar: ProgressBar
 
@@ -27,26 +30,21 @@ class MainFragment : Fragment(), ILoadMore {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        val view = inflater.inflate(R.layout.main_fragment, container, false)
-        progressBar = view.findViewById(R.id.paging_progressbar)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_photo_list)
+        binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
+        progressBar = binding.pagingProgressbar
+        val recyclerView = binding.rvPhotoList
         recyclerView.layoutManager = GridLayoutManager(context,3)
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
         viewModel.photos.observe(this, Observer {
-
             showProgress(false)
             val adapter = context?.let { it1 -> PhotoListRecyclerViewAdapter(it1,recyclerView,it) }
-
             recyclerView.adapter = adapter
-
             adapter?.setLoad(this)
-
         })
 
-        return view
+        return binding.root
     }
 
     private fun showProgress(status: Boolean) {
